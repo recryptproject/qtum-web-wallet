@@ -30,7 +30,7 @@
           </v-flex>
           <v-flex xs1>
             <p v-for="(vtx, vid) in tx.vin" :key="vid" :class="vtx.addr === wallet.info.address ? 'red--text' : ''">
-              &nbsp;QTUM
+              &nbsp;RECRYPT
             </p>
           </v-flex>
           <v-flex xs1>
@@ -53,7 +53,7 @@
           <v-flex xs1>
             <p v-for="(vtx, vid) in tx.vout" :key="vid" :class="vtx.scriptPubKey.addresses && vtx.scriptPubKey.addresses[0] === wallet.info.address ? 'green--text' : ''">
               <template v-if="vtx.scriptPubKey.addresses">
-                QTUM
+                RECRYPT
               </template>
             </p>
           </v-flex>

@@ -144,8 +144,8 @@ export default {
   },
   restore_ledger: {
     title: 'Restore From Ledger',
-    usage: 'Please ensure your firmware and app are the newest version. Plugin your Ledger, open Qtum APP, and then click the "CONNECT" button below try to connect.',
-    download: 'No Qtum APP? Please install it follow this https://www.ledgerwallet.com/apps/manager',
+    usage: 'Please ensure your firmware and app are the newest version. Plugin your Ledger, open Recrypt APP, and then click the "CONNECT" button below try to connect.',
+    download: 'No Recrypt APP? Please install it follow this https://www.ledgerwallet.com/apps/manager',
     connect: 'CONNECT',
   },
   view: {

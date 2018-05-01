@@ -1,5 +1,5 @@
 {
-  "name": "qtum-wallet",
+  "name": "recrypt-wallet",
   "version": "1.0.0",
   "description": "A Vue.js project",
   "author": "qi weiyu <qi@weiyu.me>",
@@ -53,8 +53,8 @@
     "opn": "^5.3.0",
     "optimize-css-assets-webpack-plugin": "^2.0.0",
     "ora": "^1.4.0",
-    "qtum-opcodes": "^1.0.0",
-    "qtumjs-lib": "0.0.7",
+    "recrypt-opcodes": "^1.0.0",
+    "recryptjs-lib": "0.0.7",
     "rimraf": "^2.6.0",
     "semver": "^5.5.0",
     "shelljs": "^0.7.6",

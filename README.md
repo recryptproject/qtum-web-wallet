@@ -1,2 +1,2 @@
-# qtum-web-wallet
-A web wallet for QTUM
+# recrypt-web-wallet
+A web wallet for RECRYPT

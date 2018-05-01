@@ -70,7 +70,7 @@ var webpackConfig = merge(baseWebpackConfig, {
     new FaviconsWebpackPlugin({
       logo: 'assets/images/logo.png',
       inject: true,
-      title: 'Qtum Web Wallet',
+      title: 'Recrypt Web Wallet',
       icons: {
         android: true,
         appleIcon: true,

@@ -1,19 +1,19 @@
-import qtum from 'qtumjs-lib'
+import recrypt from 'recryptjs-lib'
 import bip39 from 'bip39'
 import ledger from 'libs/ledger'
 import server from 'libs/server'
 import config from 'libs/config'
 import buffer from 'buffer'
 
-const unit = 'QTUM'
+const unit = 'RECRYPT'
 let network = {}
 switch (config.getNetwork())
 {
   case 'testnet':
-    network = qtum.networks.qtum_testnet
+    network = recrypt.networks.recrypt_testnet
     break
   case 'mainnet':
-    network = qtum.networks.qtum
+    network = recrypt.networks.recrypt
     break
 }
 
@@ -100,7 +100,7 @@ export default class Wallet {
   }
 
   static generateCreateContractTx(wallet, code, gasLimit, gasPrice, fee, utxoList) {
-    return qtum.utils.buildCreateContractTransaction(wallet.keyPair, code, gasLimit, gasPrice, fee, utxoList)
+    return recrypt.utils.buildCreateContractTransaction(wallet.keyPair, code, gasLimit, gasPrice, fee, utxoList)
   }
 
   static async generateSendToContractTx(wallet, contractAddress, encodedData, gasLimit, gasPrice, fee, utxoList) {
@@ -109,7 +109,7 @@ export default class Wallet {
         return await ledger.generateSendToContractTx(wallet.keyPair, wallet.extend.ledger.ledger, wallet.extend.ledger.path, wallet.info.address, contractAddress, encodedData, gasLimit, gasPrice, fee, utxoList, server.currentNode().fetchRawTx)
       }
     }
-    return qtum.utils.buildSendToContractTransaction(wallet.keyPair, contractAddress, encodedData, gasLimit, gasPrice, fee, utxoList)
+    return recrypt.utils.buildSendToContractTransaction(wallet.keyPair, contractAddress, encodedData, gasLimit, gasPrice, fee, utxoList)
   }
 
   static async generateTx(wallet, to, amount, fee, utxoList) {
@@ -118,7 +118,7 @@ export default class Wallet {
         return await ledger.generateTx(wallet.keyPair, wallet.extend.ledger.ledger, wallet.extend.ledger.path, wallet.info.address, to, amount, fee, utxoList, server.currentNode().fetchRawTx)
       }
     }
-    return qtum.utils.buildPubKeyHashTransaction(wallet.keyPair, to, amount, fee, utxoList)
+    return recrypt.utils.buildPubKeyHashTransaction(wallet.keyPair, to, amount, fee, utxoList)
   }
 
   static async sendRawTx(tx) {
@@ -136,7 +136,7 @@ export default class Wallet {
   static restoreFromMnemonic(mnemonic, password) {
     //if (bip39.validateMnemonic(mnemonic) == false) return false
     const seedHex = bip39.mnemonicToSeedHex(mnemonic, password)
-    const hdNode = qtum.HDNode.fromSeedHex(seedHex, network)
+    const hdNode = recrypt.HDNode.fromSeedHex(seedHex, network)
     const account = hdNode.deriveHardened(88).deriveHardened(0).deriveHardened(0)
     const keyPair = account.keyPair
     return new Wallet(keyPair)
@@ -144,7 +144,7 @@ export default class Wallet {
 
   static restoreFromMobile(mnemonic) {
     const seedHex = bip39.mnemonicToSeedHex(mnemonic)
-    const hdNode = qtum.HDNode.fromSeedHex(seedHex, network)
+    const hdNode = recrypt.HDNode.fromSeedHex(seedHex, network)
     const account = hdNode.deriveHardened(88).deriveHardened(0)
     const walletList = []
     for (let i = 0; i < 10; i++) {
@@ -159,14 +159,14 @@ export default class Wallet {
   }
 
   static restoreFromWif(wif) {
-    return new Wallet(qtum.ECPair.fromWIF(wif, network))
+    return new Wallet(recrypt.ECPair.fromWIF(wif, network))
   }
 
   static async restoreHdNodeFromLedgerPath(ledger, path) {
-    const res = await ledger.qtum.getWalletPublicKey(path)
-    const compressed = ledger.qtum.compressPublicKey(buffer.Buffer.from(res['publicKey'], 'hex'))
-    const keyPair = new qtum.ECPair.fromPublicKeyBuffer(compressed, network)
-    const hdNode = new qtum.HDNode(keyPair, buffer.Buffer.from(res['chainCode'], 'hex'))
+    const res = await ledger.recrypt.getWalletPublicKey(path)
+    const compressed = ledger.recrypt.compressPublicKey(buffer.Buffer.from(res['publicKey'], 'hex'))
+    const keyPair = new recrypt.ECPair.fromPublicKeyBuffer(compressed, network)
+    const hdNode = new recrypt.HDNode(keyPair, buffer.Buffer.from(res['chainCode'], 'hex'))
     hdNode.extend = {
       ledger: {
         ledger,

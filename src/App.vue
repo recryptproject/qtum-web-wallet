@@ -19,8 +19,8 @@
     </v-navigation-drawer>
     <v-toolbar :class="headerClass" app fixed clipped-left>
       <span class="title">
-        <i class="qtum-icon qtum-icon-logo"></i>
-        <span class="text">QTUM</span>
+        <i class="recrypt-icon recrypt-icon-logo"></i>
+        <span class="text">RECRYPT</span>
         <span @click="changeView('settings')">
           --{{ $t('common.' + network) }}
         </span>
